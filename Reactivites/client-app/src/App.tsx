@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div >
-      <Header as ='h2' icon='user' content='Lets Catch UP'/>
+      <Header as ='h2' icon='user' lass="ui icon header" content='Lets Catch UP'/>
 
       <List>
       {activities.map((activity: any) =>(
