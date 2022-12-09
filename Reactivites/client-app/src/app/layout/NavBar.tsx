@@ -1,28 +1,42 @@
-import React from "react";
-import { Button, Container, Image, Menu, MenuHeader, MenuItem, MenuMenu } from "semantic-ui-react";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import { Button, Container, Menu, Image, Dropdown } from 'semantic-ui-react';
+import { useStore } from '../stores/store';
 
-interface Props{   
-    openForm: () => void;
-}
+export default observer(function Navbar() {
+    const { userStore: { user, logout, isLoggedIn } } = useStore();
 
-export default function NavBar({openForm}:Props) {
     return (
         <>
-        <Menu inverted fixed='top'>
-        <Container>
-            <Menu.Item header>
-                <img src="/assets/CSU_Reverse_Seal.jpg" alt="Logo" style={{marginRight:'10px'}}></img>
-            </Menu.Item>
-
-            <Menu.Item name='Activities'/>
-
-            <Menu.Item>
-                <Button onClick={openForm} positive content='Create Activity'/>
-            </Menu.Item>
-
-        </Container>
-    </Menu>
-    </>
+            <Menu inverted fixed='top'>
+                <Container>
+                    <Menu.Item as={NavLink} to='/' header>
+                        <img src="/assets/logo.png" alt="logo" style={{ marginRight: '10px' }} />
+                        Reactivities
+                        Lets Catch Up
+                    </Menu.Item>
+                    {isLoggedIn &&
+                        <>
+                            <Menu.Item as={NavLink} to='/activities' name="Activities" />
+                            <Menu.Item as={NavLink} to='/errors' name="Errors" />
+                            <Menu.Item>
+                                <Button as={NavLink} to='/createActivity' positive content='Create Activity' />
+                            </Menu.Item>
+                            <Menu.Item position='right'>
+                                <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
+                                <Dropdown pointing='top left' text={user?.displayName}>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item as={NavLink} to={`/profiles/${user?.username}`} text='My Profile' icon='user' />
+                                        <Dropdown.Item onClick={logout} text='Logout' icon='power' />
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Menu.Item>
+                        </>
+                    }
+                </Container>
+            </Menu>
+            <Outlet />
+        </>
     )
-}
-
+})
