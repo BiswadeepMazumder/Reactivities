@@ -1,9 +1,9 @@
 # Reactivities
 
-Repository for the Udemy Course https://www.udemy.com/course/complete-guide-to-building-an-app-with-net-core-and-react/ by Neil Cummings
+THis course has helped me to learn these new framworks and I Have done this project as a part of my Software Engineering project CIS 634.
 
-You can find a live app here https://reactivities-sbp.herokuapp.com/
-
-The differences between my version of the app and the one from the course is that I managed to port the entire course to React-Router-DOM v6, while the author is using the outdated v5
-
-Feel free to fork the repository or to ask any question!
+To run this project,
+1. In one termianl run the backend by navigating to Reactivites/API and type dotnet run. 
+   this would download the necessary files update. localhost:/5000
+2. In other terminal run the front by navigating to Reactivites/client-app and type npm i, then npm start
+   this would download the necessary files update. localhost/3000
